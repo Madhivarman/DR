@@ -1,7 +1,7 @@
 # DR
 document retrieval
 
-Document Retrieval : Retrieving document from the database by user queries . 
+Document Retrieval : Retrieving document from the database by related to User Queries. 
 
 Algorthims :
 
