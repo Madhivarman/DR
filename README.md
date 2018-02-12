@@ -14,5 +14,5 @@ Algorthims :
 
 Work Description :
 
-**index.py** - Create indexing for the document to retrieve and locate
-**preprocess.py** - Creating training and testing dataset
+- **index.py** - Create indexing for the document to retrieve and locate
+- **preprocess.py** - Creating training and testing dataset
