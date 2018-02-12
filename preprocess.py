@@ -4,10 +4,10 @@ import os
 import sys
 
 #global declaration
-path_file = "/home/madhi/Documents/python programs/neuralnetworks/fp/Reuters21578-Apte-115Cat/training"
+path_file = "/<path_to_training_dataset>"
 topic_folders = os.listdir(path_file)
 
-test_path_file = "/home/madhi/Documents/python programs/neuralnetworks/fp/Reuters21578-Apte-115Cat/training"
+test_path_file = "<path_to_testing_dataset>"
 test_topic_folders = os.listdir(test_path_file)
 
 #file to change into dataframe
