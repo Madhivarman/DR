@@ -45,7 +45,7 @@ doc_clf = doc_clf.fit(X,Y)
 predicted = doc_clf.predict(X)
 score = np.mean(predicted == Y)
 
-print("Accuracy Using StochasticGradientClassifier:{}".format(score * 100)) #76% accuracy
+print("Accuracy Using StochasticGradientClassifier:{}".format(score * 100)) #78% accuracy
 
 #predict the document
 category = doc_clf.predict([r"US COULD COMPLAIN TO GATT ON CANADA CORN DUTY WASHINGTON, March 16  US Trade Representative Clayton Yeutter suggested the US could file a formal complaint with the General Agreement on Tariffs and Trade (GATT) challenging Canadas decision to impose duties on US corn imports Asked about the Canadian government decision to apply a duty of 849 cents per bushel on US corn shipments, Yeutter said the US could file a formal complaint GATT under the dispute settlement procedures of the subsidies code Other US options would be to appeal the decision in Canadian courts, or to retaliate against Canadian goods, a lowerlevel US trade official said However, retaliation is an unlikely step, at least initially, that official said No decision on US action is expected at least until after documents on the ruling are received here later this week"])
