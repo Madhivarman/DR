@@ -17,3 +17,4 @@ Work Description :
 - **index.py** - Create indexing for the document to retrieve and locate
 - **preprocess.py** - Creating training and testing dataset
 - **classify.py** - To classify the Uploading document
+- **feature_Extraction.ipynb** -To extract important features from the document
