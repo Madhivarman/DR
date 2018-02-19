@@ -90,7 +90,7 @@ rndm_clf = Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),
 rndm_predict = rndm_clf.fit(X,Y).predict(X)
 rndm_score = np.mean(rndm_predict==Y)
 
-print("Accuracy using Random Forest Classifier is:{}".format(rndm_score * 100))
+print("Accuracy using Random Forest Classifier is:{}".format(rndm_score * 100)) # 83% accuracy
 
 
 
