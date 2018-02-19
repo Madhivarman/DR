@@ -75,5 +75,22 @@ mnb_score = np.mean(mnb_predict == Y)
 
 print("Accuracy using Multinomial NaiveBayes Classifier is:{}".format(mnb_score*100))
 
+#support vector machine
+svc_clf = Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),
+					('clf',SVC(C=1.0,kernel='linear'))])
+svc_predict = svc_clf.fit(X,Y).predict(X)
+svc_score = np.mean(svc_predict == Y)
+
+print("Accuracy using Support Vector Machine is:{}".format(svc_score*100))
+
+# Random Forest Classifier
+rndm_clf = Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),
+					('clf',RandomForestClassifier(n_estimators=1000,criterion='gini',oob_score=True))])
+
+rndm_predict = rndm_clf.fit(X,Y).predict(X)
+rndm_score = np.mean(rndm_predict==Y)
+
+print("Accuracy using Random Forest Classifier is:{}".format(rndm_score * 100))
+
 
 
