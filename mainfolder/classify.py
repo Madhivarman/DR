@@ -60,7 +60,7 @@ doc_clf = doc_clf.fit(X,Y)
 predicted = doc_clf.predict(X)
 score = np.mean(predicted == Y)
 
-print("Accuracy Using StochasticGradientClassifier:{}".format(score * 100))
+print("Accuracy Using StochasticGradientClassifier:{}".format(score * 100)) #77% accuracy
 
 #predict the document
 category = doc_clf.predict([r'Cotton plays a major role in pharmacy. It helps to clot the blood '])
@@ -73,7 +73,7 @@ mnb_clf = Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),
 mnb_predict = mnb_clf.fit(X,Y).predict(X)
 mnb_score = np.mean(mnb_predict == Y)
 
-print("Accuracy using Multinomial NaiveBayes Classifier is:{}".format(mnb_score*100))
+print("Accuracy using Multinomial NaiveBayes Classifier is:{}".format(mnb_score*100)) # 58% accuracy
 
 #support vector machine
 svc_clf = Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),
@@ -81,7 +81,7 @@ svc_clf = Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),
 svc_predict = svc_clf.fit(X,Y).predict(X)
 svc_score = np.mean(svc_predict == Y)
 
-print("Accuracy using Support Vector Machine is:{}".format(svc_score*100))
+print("Accuracy using Support Vector Machine is:{}".format(svc_score*100)) # 82 % accuracy
 
 # Random Forest Classifier
 rndm_clf = Pipeline([('vect',CountVectorizer()),('tfidf',TfidfTransformer()),
