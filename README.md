@@ -18,3 +18,4 @@ Work Description :
 - **preprocess.py** - Creating training and testing dataset
 - **classify.py** - To classify the Uploading document
 - **feature_Extraction.ipynb** -To extract important features from the document
+- **clustering.ipynb** - To cluster the extracted_features into 5 clusters and visualize the documents located in the clustering
