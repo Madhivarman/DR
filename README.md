@@ -20,3 +20,9 @@ Work Description :
 - **feature_Extraction.ipynb** -To extract important features from the document
 - **predict.py** - To Predict the category of the document
 - **clustering.ipynb** - To cluster the extracted_features into 5 clusters and visualize the documents located in the clustering
+
+
+
+**Can i use this code ? **
+
+Feel Free to use my code in your project but mentioning the source is great compliment .. :)
