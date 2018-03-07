@@ -11,10 +11,7 @@
 
 
 import numpy as np 
-import pandas as pd 
 import tensorflow as tf
-import statsmodels
-import math
 
 list_already_encoded = [] #to store encoded list
 
@@ -133,10 +130,19 @@ cross_entropy = -tf.reduce_sum(training_output * tf.clip_by_value(prediction,1e-
 optimizer = tf.train.AdamOptimizer()
 minimizer = optimizer.minimize(cross_entropy)
 
+# assuming that absolute difference between output and correct answer is 0.5
+# or less we can round it to the correct output.
+accuracy = tf.reduce_mean(tf.cast(tf.abs(training_output - prediction) < 0.5, tf.float32))
+
+
 #initialize the graph and start the session
 run_init_op = tf.global_variables_initializer()
+
 sess = tf.Session() #start the session
 sess.run(run_init_op) #run the Session
+
+# Add ops to save and restore all the variables.
+saver = tf.train.Saver()
 
 batch_size = 100 
 no_of_batches = int((len(X_norm)) / batch_size) #run for 27 batches
@@ -159,15 +165,16 @@ for i in range(epochs):
       sess.run(minimizer,{training_data:inp,training_output:out})
    #print
    print("Epochs {} is processed".format(str(i)))
-   incorrect = sess.run(error_rate,{training_data:inp,training_output:out})
-   print('Epoch {0} error {1} %'.format(i + 1, 100 * error_rate))
+   #to calculate valid accuracy
+   valid_accuracy = sess.run(accuracy,{training_data:inp,training_output:out})
+
+   print("Epoch:{} , valid_accuracy : {} %".format(i + 1,100 * valid_accuracy))
 
 
 #save the tensorflow model
-save = saver.save(sess,'text_generate_trained_model.ckpt')
-#result
-result = rnn_outputs.evaluate(input_fn=training_data)
-print("The Model result:")
-print(result)
+save_path= saver.save(sess,'/home/madhi/Documents/python programs/neuralnetworks/fp/neuralnetwork/text_generate_trained_model.ckpt')
+print("Model saved in the path : {}".format(save_path))
+
+
 #close the session
 sess.close() 
