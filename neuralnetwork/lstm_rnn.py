@@ -10,9 +10,6 @@
 
 
 
-#clear error 
-#error is in matmul matrix shape [100,100,15]
-
 import numpy as np 
 import pandas as pd 
 import tensorflow as tf
@@ -116,12 +113,20 @@ initial_state = cell.zero_state(X_norm.shape[1], tf.float32) #creating a tensor 
 rnn_outputs, rnn_states = tf.nn.dynamic_rnn(cell,training_data,
                                              initial_state=initial_state,dtype=tf.float32) 
 
+
+#get the shape of the rnn_outputs
+#transpose the matrix
+rnn_out = tf.transpose(rnn_outputs,[1,0,2]) #transpose the matrix into 2 dimensions
+last = tf.gather(rnn_out,int(rnn_out.get_shape()[0])-1) #value of output to the last tensor
+
+print("Shape of the shape_rnn_output Matrix is {}".format(last))
+
 #assigning weights and biases
 bias =  tf.Variable(tf.constant(0.1,shape=[training_output.get_shape()[1]]))
 weight =  tf.Variable(tf.truncated_normal([hidden_nodes,int(training_output.get_shape()[1])])) #tensor shape(105,15)
 
 #prediction
-prediction = tf.nn.softmax(tf.matmul(rnn_outputs,weight)+bias) # shape(100,15)
+prediction = tf.nn.softmax(tf.matmul(last,weight)+bias) # shape(100,15)
 cross_entropy = -tf.reduce_sum(training_output * tf.clip_by_value(prediction,1e-10,1.0)) #calculate the cross_entropy
 
 #optimizer
@@ -134,7 +139,7 @@ sess = tf.Session() #start the session
 sess.run(run_init_op) #run the Session
 
 batch_size = 100 
-no_of_batches = math.ceil((len(X_norm)) / batch_size) #run for 28 batches
+no_of_batches = int((len(X_norm)) / batch_size) #run for 27 batches
 epochs = 500 # number of epochs
 
 #calculating mistakes and error_rates
@@ -143,6 +148,9 @@ error_rate = tf.reduce_mean(tf.cast(mistakes,tf.float32))
 
 
 #run the loop
+#the model runs for total 500 iterations
+#run 500 iterations for total_batches
+
 for i in range(epochs):
    ptr = 0
    for j in range(no_of_batches):
@@ -152,4 +160,14 @@ for i in range(epochs):
    #print
    print("Epochs {} is processed".format(str(i)))
    incorrect = sess.run(error_rate,{training_data:inp,training_output:out})
-   print('Epoch {:2d} error {:3.1f}%'.format(i + 1, 100 * error_rate))
+   print('Epoch {0} error {1} %'.format(i + 1, 100 * error_rate))
+
+
+#save the tensorflow model
+save = saver.save(sess,'text_generate_trained_model.ckpt')
+#result
+result = rnn_outputs.evaluate(input_fn=training_data)
+print("The Model result:")
+print(result)
+#close the session
+sess.close() 
