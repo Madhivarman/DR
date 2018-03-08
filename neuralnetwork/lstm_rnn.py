@@ -14,6 +14,7 @@ import numpy as np
 import tensorflow as tf
 
 list_already_encoded = [] #to store encoded list
+sess = tf.Session() #start the tensorflow Session
 
 def already_variable_is_encoded(output):
    status = None
@@ -137,8 +138,6 @@ accuracy = tf.reduce_mean(tf.cast(tf.abs(training_output - prediction) < 0.5, tf
 
 #initialize the graph and start the session
 run_init_op = tf.global_variables_initializer()
-
-sess = tf.Session() #start the session
 sess.run(run_init_op) #run the Session
 
 # Add ops to save and restore all the variables.
